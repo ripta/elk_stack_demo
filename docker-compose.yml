@@ -1,17 +1,37 @@
-elasticsearch:
-  image: elasticsearch:latest
+# elasticsearch:
+#   image: elasticsearch:latest
+#   ports:
+#     - "9200:9200"
+#     - "9300:9300"
+# logstash:
+#   image: logstash:latest
+#   ports:
+#     - "5000:5000"
+#   links:
+#     - elasticsearch
+# kibana:
+#   image: kibana:latest
+#   ports:
+#     - "5601:5601"
+#   links:
+#     - elasticsearch
+postgres:
+  build: ./postgres
   ports:
-    - "9200:9200"
-    - "9300:9300"
-logstash:
-  image: logstash:latest
+    - "5432:5432"
+rails:
+  build: ./rails/log-demo
+  command: bundle exec rails s -p 3000 -b '0.0.0.0'
   ports:
-    - "5000:5000"
+    - "3000:3000"
   links:
-    - elasticsearch
-kibana:
-  image: kibana:latest
-  ports:
-    - "5601:5601"
-  links:
-    - elasticsearch
+    - postgres
+  volumes:
+    - ./rails/log-demo:/code
+  environment:
+    RACK_ENV: development
+    SECRET_KEY_BASE: foobar
+# sinatra:
+#   build: ./sinatra
+#   ports:
+#     - "4567:4567"

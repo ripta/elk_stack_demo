@@ -4,6 +4,7 @@ source source_rubygems do
   gem 'rails'
   gem 'pg'
   gem 'faker'
-  # gem 'lograge'
+  gem 'lograge'
+  gem 'puma'
   gem 'rails_stdout_logging'
 end

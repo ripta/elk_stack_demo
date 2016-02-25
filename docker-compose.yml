@@ -15,23 +15,26 @@
 #     - "5601:5601"
 #   links:
 #     - elasticsearch
-postgres:
-  build: ./postgres
-  ports:
-    - "5432:5432"
-rails:
-  build: ./rails/log-demo
-  command: bundle exec rails s -p 3000 -b '0.0.0.0'
-  ports:
-    - "3000:3000"
-  links:
-    - postgres
-  volumes:
-    - ./rails/log-demo:/code
-  environment:
-    RACK_ENV: development
-    SECRET_KEY_BASE: foobar
-# sinatra:
-#   build: ./sinatra
+# postgres:
+#   build: ./postgres
 #   ports:
-#     - "4567:4567"
+#     - "5432:5432"
+# rails:
+#   build: ./rails/log-demo
+#   command: bundle exec rails s -p 3000 -b '0.0.0.0'
+#   ports:
+#     - "3000:3000"
+#   links:
+#     - postgres
+#   volumes:
+#     - ./rails/log-demo:/app
+#   environment:
+#     RACK_ENV: production #development
+#     SECRET_KEY_BASE: foobar
+sinatra:
+  build: ./sinatra
+  command: bundle exec ruby app.rb -p '4567'
+  ports:
+    - "4567:4567"
+  volumes:
+    - ./sinatra:/app

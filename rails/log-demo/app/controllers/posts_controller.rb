@@ -1,7 +1,8 @@
 class PostsController < ApplicationController
   def index
     @posts = Post.all
-    puts @posts.first
+    logger.info(@posts.first)
+    logger.debug("foobar")
   end
 
   def show

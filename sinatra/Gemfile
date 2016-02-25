@@ -3,4 +3,5 @@ source_rubygems = "https://rubygems.org"
 source source_rubygems do
   gem 'sinatra'
   gem 'sinatra-contrib'
+  gem 'puma'
 end

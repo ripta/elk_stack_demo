@@ -23,11 +23,12 @@ module LogDemo
     # Do not swallow errors in after_commit/after_rollback callbacks.
     config.active_record.raise_in_transactional_callbacks = true
 
+    # STDOUT.sync = true
     # config.logger = Logger.new(STDOUT)
-    # config.lograge.enabled = true
-    # config.lograge.formatter = Lograge::Formatters::Json.new
-    # config.lograge.custom_options = lambda do |event|
-    #   {user: event.payload[:user]}
-    # end
+    config.lograge.enabled = true
+    config.lograge.formatter = Lograge::Formatters::Json.new
+    config.lograge.custom_options = lambda do |event|
+      {user: event.payload[:user]}
+    end
   end
 end

@@ -13,6 +13,7 @@ $logger.formatter = proc do |severity, time, progname, msg|
   }.to_json
 end
 
+set :bind, '0.0.0.0'
 set :logger, $logger
 
 get '/' do
